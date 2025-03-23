@@ -1,0 +1,24 @@
+{
+  "name": "algonect",
+  "version": "1.0.0",
+  "description": "Term Project by Group 5. Where every uni student connects.",
+  "main": "index.js",
+  "scripts": {
+    "sass-build": "sass --no-source-map scss:css",
+    "sass-watch": "sass --watch --no-source-map scss:css"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Tarangrana"
+  },
+  "keywords": [
+    "Term",
+    "Project"
+  ],
+  "author": "Tarang Rana",
+  "license": "ISC",
+  "dependencies": {
+    "bootstrap": "^5.3.3",
+    "sass": "^1.86.0"
+  }
+}
