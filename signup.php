@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>Sign Up - AlgoNect</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="css/style.css">
   <style>
     .auth-container {
       min-height: 100vh;
@@ -24,6 +24,42 @@
   </style>
 </head>
 <body>
+<?php
+require_once 'includes\db_connect.php';
+
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $name     = $_POST['name'];
+    $email    = $_POST['email'];
+    $password = $_POST['password'];
+    $confirm  = $_POST['confirm_password'];
+    $monthMap = [
+        "Jan" => "01", "Feb" => "02", "Mar" => "03", "Apr" => "04",
+        "May" => "05", "Jun" => "06", "Jul" => "07", "Aug" => "08",
+        "Sep" => "09", "Oct" => "10", "Nov" => "11", "Dec" => "12"
+    ];
+    $month    = $monthMap[$_POST['birth_month']];
+    $birth    = $_POST['birth_year'] . '-' . $month . '-' . str_pad($_POST['birth_day'], 2, "0", STR_PAD_LEFT);
+    $gender   = $_POST['gender'];
+
+    if ($password !== $confirm) {
+        echo "<script>alert('Passwords do not match');</script>";
+    } else {
+        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+
+        $stmt = $conn->prepare("INSERT INTO users_info (name, email, password, birthdate, gender) VALUES (?, ?, ?, ?, ?)");
+        $stmt->bind_param("sssss", $name, $email, $hashedPassword, $birth, $gender);
+
+        if ($stmt->execute()) {
+            echo "<script>alert('Signup successful!'); window.location.href='login.php';</script>";
+        } else {
+            echo "<script>alert('Signup failed. Email may already be registered.');</script>";
+        }
+
+        $stmt->close();
+    }
+}
+?>
+
 <div class="auth-container">
   <div class="auth-box">
     <h3 class="mb-4 text-center text-primary">Create an AlgoNect Account</h3>
