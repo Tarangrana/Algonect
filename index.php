@@ -134,45 +134,30 @@
          readonly>
 </div>
 
-      <!-- Sample Post 1 -->
-      <div class="post-card">
-        <div class="d-flex align-items-center mb-2">
-          <img src="assets/images/default-pfp.png" width="35" height="35" class="rounded-circle me-2">
-          <div>
-            <div class="post-author">Kavya</div>
-            <small class="text-muted">5d • <span class="text-primary">#question</span></small>
-          </div>
-        </div>
-        <h6 class="fw-bold">university related</h6>
-        <p class="text-muted mb-2">
-          guys b hnst why did i get rejected from university of washington (wasn’t my priority anyway) when i have like immaculate scores and pretty good extra curriculars according to me?
-        </p>
-        <div class="d-flex justify-content-start text-muted fs-6">
-          <span class="me-4">🔺 6</span>
-          <span>💬 5</span>
-        </div>
-      </div>
+<?php
+require_once 'includes/db_connect.php';
+$sql = "SELECT posts.*, users_info.name FROM posts 
+        JOIN users_info ON posts.user_id = users_info.id 
+        ORDER BY posts.created_at DESC";
 
-        <!-- Post 2 -->
-        <div class="post-card p-4">
-          <div class="d-flex align-items-center mb-3">
-            <img src="assets/images/default-pfp.png" class="rounded-circle me-3" width="40" height="40" />
-            <div>
-              <div class="fw-semibold">Saketh Ch</div>
-              <small class="text-muted">1d • <span class="text-primary">#general</span></small>
-            </div>
-          </div>
-          <h6 class="fw-bold">FLIX BUS STORIES</h6>
-          <p class="text-muted">
-            First time in last 6 years of travelling in flix bus I saw how lavatory is deposited when bus was running 😂 Then in one bus stop...
-          </p>
-          <div class="d-flex gap-4 text-muted">
-            <span>🔺 9</span>
-            <span>💬 3</span>
-          </div>
-        </div>
+$result = $conn->query($sql);
+
+while ($row = $result->fetch_assoc()):
+?>
+  <div class="post-card p-4 mb-4">
+    <div class="d-flex align-items-center mb-3">
+      <img src="assets/images/default-pfp.png" class="rounded-circle me-3" width="40" height="40" />
+      <div>
+        <div class="fw-semibold"><?= htmlspecialchars($row['name']) ?></div>
+        <small class="text-muted"><?= date("d M, Y", strtotime($row['created_at'])) ?> • <span class="text-primary">#<?= htmlspecialchars($row['tag']) ?></span></small>
       </div>
-    </main>
+    </div>
+    <h6 class="fw-bold"><?= htmlspecialchars($row['title']) ?></h6>
+    <p class="text-muted"><?= nl2br(htmlspecialchars($row['content'])) ?></p>
+  </div>
+<?php endwhile; ?>
+
+
 
     <!-- Right Sidebar -->
     <aside class="col-md-4 mb-4">
@@ -192,7 +177,7 @@
 
         <h6 class="text-primary fw-semibold mb-3">Create Post:</h6>
 
-        <form action="create_post.php" method="POST" enctype="multipart/form-data">
+        <form action="php/create_post.php" method="POST" enctype="multipart/form-data">
 
           <!-- Profile + Tag Selector -->
           <div class="d-flex align-items-center mb-3">
@@ -235,6 +220,17 @@
 
 
 <!-- Scripts -->
+<script>
+  const modal = document.getElementById('createPostModal');
+
+  modal.addEventListener('show.bs.modal', () => {
+    if (document.body.classList.contains('dark-mode')) {
+      modal.classList.add('dark-mode');
+    } else {
+      modal.classList.remove('dark-mode');
+    }
+  });
+</script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
   const toggle = document.getElementById('darkModeToggle');
