@@ -60,6 +60,18 @@ if (!isset($_SESSION['user_id'])) {
     <div class="col-md-6 main-feed">
 
       <!-- Sample Post 1 -->
+      <form action="create_post.php" method="POST" class="mb-4">
+  <input type="text" name="title" class="form-control mb-2" placeholder="Post title" required>
+  <textarea name="content" class="form-control mb-2" rows="4" placeholder="What's on your mind?" required></textarea>
+  <select name="tag" class="form-select mb-2">
+    <option value="general">General</option>
+    <option value="advice">Advice</option>
+    <option value="rant">Rant</option>
+    <option value="storytime">Storytime</option>
+    <option value="question">Question</option>
+  </select>
+  <button type="submit" class="btn btn-primary w-100">Post</button>
+</form>
       <div class="post-card">
         <div class="d-flex align-items-center mb-2">
           <img src="assets/images/default-pfp.png" width="35" height="35" class="rounded-circle me-2">
