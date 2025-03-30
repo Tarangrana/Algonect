@@ -24,6 +24,42 @@
   </style>
 </head>
 <body>
+
+<?php
+session_start();
+require_once 'includes\db_connect.php';
+
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+
+    // Fetch user
+    $stmt = $conn->prepare("SELECT * FROM users_info WHERE email = ?");
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
+
+    $result = $stmt->get_result();
+    if ($result->num_rows === 1) {
+        $user = $result->fetch_assoc();
+        
+        if (password_verify($password, $user['password'])) {
+            // ✅ Login success
+            $_SESSION['user_id'] = $user['id'];
+            $_SESSION['name'] = $user['name'];
+
+            echo "<script>alert('Login successful!'); window.location.href='index.php';</script>";
+            exit;
+        } else {
+            echo "<script>alert('Incorrect password');</script>";
+        }
+    } else {
+        echo "<script>alert('No user found with that email');</script>";
+    }
+
+    $stmt->close();
+}
+?>
+
 <div class="auth-container">
   <div class="auth-box text-center">
     <h3 class="mb-4 text-primary">Login to AlgoNect</h3>

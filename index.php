@@ -1,26 +1,28 @@
 <?php
 session_start();
-$user = [
-    'name' => 'Yaman',
-    'profile_pic' => 'assets/images/default-pfp.png'
-];
+if (!isset($_SESSION['user_id'])) {
+    header("Location: login.php");
+    exit;
+}
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <title>AlgoNect - Home</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-  <link rel="stylesheet" href="css\style.css">
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
 <!-- Header -->
-<div class="header">
+<div class="header d-flex justify-content-between align-items-center px-4 py-2 border-bottom bg-white">
   <h4 class="text-primary m-0">AlgoNect</h4>
   <div>
-    <a href="#" class="btn btn-outline-primary me-2">Log in</a>
-    <a href="#" class="btn btn-primary">Sign Up</a>
+    <a href="profile.php" class="btn btn-outline-success">
+      👤 <?= htmlspecialchars($_SESSION['name']) ?>
+    </a>
   </div>
 </div>
 
@@ -54,13 +56,13 @@ $user = [
       </ul>
     </div>
 
-    <!-- Center Feed (Public View) -->
+    <!-- Center Feed -->
     <div class="col-md-6 main-feed">
 
       <!-- Sample Post 1 -->
       <div class="post-card">
         <div class="d-flex align-items-center mb-2">
-          <img src="<?= $user['profile_pic'] ?>" width="35" height="35" class="rounded-circle me-2">
+          <img src="assets/images/default-pfp.png" width="35" height="35" class="rounded-circle me-2">
           <div>
             <div class="post-author">Kavya</div>
             <small class="text-muted">5d • <span class="text-primary">#question</span></small>
@@ -79,7 +81,7 @@ $user = [
       <!-- Sample Post 2 -->
       <div class="post-card">
         <div class="d-flex align-items-center mb-2">
-          <img src="<?= $user['profile_pic'] ?>" width="35" height="35" class="rounded-circle me-2">
+          <img src="assets/images/default-pfp.png" width="35" height="35" class="rounded-circle me-2">
           <div>
             <div class="post-author">Saketh Ch</div>
             <small class="text-muted">1d • <span class="text-primary">#general</span></small>
@@ -107,7 +109,6 @@ $user = [
   </div>
 </div>
 
-<!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
