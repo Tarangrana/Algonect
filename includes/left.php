@@ -1,4 +1,3 @@
-<!-- Left Sidebar -->
 <aside class="col-md-2 mb-4">
   <div class="p-3 rounded shadow-sm sidebar">
     <h6 class="fw-semibold mb-3">Menu</h6>

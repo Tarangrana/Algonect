@@ -1,157 +1,45 @@
-/* Global font and typography */
-body,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p,
-a,
-small,
-span,
-input,
-button,
-ul,
-li {
-  font-family: "Poppins", sans-serif;
-  color: #343a40;
-  font-weight: 400;
-  margin: 0;
-  padding: 0;
+/* Core dark mode variables */
+:root {
+  --bg-color: #f8f9fa;
+  --text-color: #212529;
+  --card-bg: #ffffff;
+  --muted-color: #6c757d;
+  --link-color: #0d6efd;
+}
+
+body.dark-mode {
+  --bg-color: #121212;
+  --text-color: #eaeaea;
+  --card-bg: #1e1e1e;
+  --muted-color: #bbbbbb;
+  --link-color: #58a6ff;
+}
+
+/* Base styles */
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+/* Make post-card and ALL its children inherit dark mode colors */
+.post-card {
+  background-color: var(--card-bg);
+  color: var(--text-color);
+}
+
+.post-card * {
+  color: var(--text-color) !important;
+}
+
+/* Handle muted and links */
+.text-muted {
+  color: var(--muted-color) !important;
 }
 
 a {
-  text-decoration: none;
+  color: var(--link-color);
 }
 
-/* Header */
-.header {
-  height: 60px;
-  background-color: #ffffff;
-  border-bottom: 1px solid #e6e6e6;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 30px;
-}
-
-/* Sidebar */
-/* Sidebar container */
-.sidebar {
-  background-color: #fff;
-  border-right: 1px solid #e6e6e6;
-  height: calc(100vh - 60px);
-  padding: 30px 20px 20px 30px;
-}
-
-/* Sidebar nav list */
-.sidebar ul.nav {
-  padding-left: 0;
-  list-style: none;
-}
-
-/* Sidebar nav items */
-.sidebar .nav-item {
-  margin-bottom: 10px;
-}
-
-/* Sidebar links */
-.sidebar .nav-link {
-  font-family: "Poppins", sans-serif;
-  font-size: 0.95rem;
-  font-weight: 400;
-  color: #555;
-  padding: 4px 10px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.sidebar .nav-link:hover {
-  background-color: #f5f5f5;
-  border-radius: 6px;
-  color: #007bff;
-  transition: 0.2s;
-}
-
-/* Spaces dropdown clean vertical style */
-#spacesMenu {
-  border-left: 1px solid #e0e0e0;
-  padding-left: 10px;
-  margin-left: 5px;
-  margin-top: 6px;
-}
-
-#spacesMenu .nav-link {
-  font-size: 0.9rem;
-  color: #888;
-  padding: 2px 0;
-}
-
-#spacesMenu .nav-link:hover {
-  color: #007bff;
-  background: none;
-}
-
-/* Optional: Remove collapse arrow spacing */
-.sidebar .nav-link[data-bs-toggle="collapse"] {
-  padding-left: 0;
-}
-
-/* Main Feed */
-.main-feed {
-  padding: 20px;
-  height: calc(100vh - 60px);
-  overflow-y: auto;
-}
-
-/* Post Card */
-.post-card {
-  border-radius: 15px;
-  border: 1px solid #ddd;
-  margin-bottom: 20px;
-  background: white;
-  padding: 20px;
-}
-
-.post-author {
-  font-weight: 600;
-}
-
-/* Input Style */
-input.form-control.rounded-pill {
-  border-radius: 50px;
-  padding: 10px 20px;
-  border: 1px solid #ccc;
-}
-
-/* Right Sidebar */
-.rightbar {
-  background-color: #fff;
-  border-left: 1px solid #e6e6e6;
-  height: calc(100vh - 60px);
-  padding: 20px;
-}
-
-/* Bootstrap overrides */
-.nav-link:hover,
-.nav-link.active {
-  background-color: #e3f2fd;
-  border-radius: 10px;
-  color: #007bff !important;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-weight: 600;
-}
-
-.modal-backdrop.show {
-  backdrop-filter: blur(4px);
-  background-color: rgba(255, 255, 255, 0.3);
+a:hover {
+  opacity: 0.85;
 }
