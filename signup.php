@@ -24,6 +24,7 @@
   </style>
 </head>
 <body>
+
 <?php
 require_once 'includes\db_connect.php';
 
@@ -71,17 +72,18 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
       <div class="mb-3">
         <label class="form-label">Email address</label>
-        <input type="email" class="form-control" placeholder="Enter email" name="email" required>
+        <input type="email" class="form-control" id="email" name="email" placeholder="Enter email" required>
+<span id="emailWarning" class="text-danger small d-none">Only @algomau.ca emails are allowed.</span>
       </div>
 
       <div class="mb-3">
         <label class="form-label">Password</label>
-        <input type="password" class="form-control" placeholder="Create password" name="password" required>
+        <input type="password" class="form-control" id="password" name="password" placeholder="Create password" required>
       </div>
 
       <div class="mb-3">
-        <label class="form-label">Confirm Password</label>
-        <input type="password" class="form-control" placeholder="Re-type password" name="confirm_password" required>
+      <input type="password" class="form-control" id="confirm_password" name="confirm_password" placeholder="Re-type password" required>
+      <span id="passwordWarning" class="text-danger small d-none">Passwords do not match.</span>
       </div>
 
       <div class="mb-3">
@@ -135,5 +137,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     </div>
   </div>
 </div>
+<script src="js/email-password-validate.js"></script>
+
 </body>
 </html>
