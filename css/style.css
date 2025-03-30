@@ -150,3 +150,8 @@ h5,
 h6 {
   font-weight: 600;
 }
+
+.modal-backdrop.show {
+  backdrop-filter: blur(4px);
+  background-color: rgba(255, 255, 255, 0.3);
+}
