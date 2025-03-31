@@ -8,7 +8,6 @@
   <!-- Styles -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
   <link rel="stylesheet" href="css/style.css" />
-
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet"/>
 
   <style>
@@ -133,8 +132,6 @@ while ($row = $result->fetch_assoc()):
 
 <?php include 'includes/footer.php'; ?>
 
-
-
 <!-- Scripts -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
@@ -154,7 +151,6 @@ while ($row = $result->fetch_assoc()):
     });
   }
 </script>
-
 
 </body>
 </html>

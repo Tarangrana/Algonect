@@ -14,9 +14,23 @@ $isLoggedIn = isset($_SESSION['user_id']);
     </div>
 
     <?php if ($isLoggedIn): ?>
-      <a href="profile.php" class="btn btn-outline-success">
-        👤 <?= htmlspecialchars($_SESSION['name']) ?>
-      </a>
+      <!-- Profile Dropdown -->
+      <div class="dropdown">
+        <img src="<?= $_SESSION['profile_pic'] ?? 'assets/images/default-pfp.png' ?>" 
+             alt="Profile" 
+             class="rounded-circle dropdown-toggle" 
+             width="40" height="40" 
+             data-bs-toggle="dropdown" 
+             role="button" 
+             aria-expanded="false" 
+             style="cursor:pointer; border: 2px solid transparent;">
+  
+        <ul class="dropdown-menu dropdown-menu-end shadow-sm mt-2">
+          <li><a class="dropdown-item" href="profile.php">Profile</a></li>
+          <li><hr class="dropdown-divider"></li>
+          <li><a class="dropdown-item text-danger" href="logout.php">Sign Out</a></li>
+        </ul>
+      </div>
     <?php else: ?>
       <a href="login.php" class="btn btn-outline-primary">Log in</a>
       <a href="signup.php" class="btn btn-primary">Sign Up</a>
