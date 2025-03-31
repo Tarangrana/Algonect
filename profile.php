@@ -35,12 +35,19 @@ $user = $result->fetch_assoc();
 </head>
 <body style="background-color:#f0f2f5;">
   <div class="profile-box">
+  <form action="php/update_profile_pic.php" method="POST" enctype="multipart/form-data">
+  <label for="profile_pic" class="form-label">Update Profile Picture:</label>
+  <input type="file" name="profile_pic" class="form-control mb-2" accept="image/*" required>
+  <button type="submit" class="btn btn-primary">Upload</button>
+</form>
+
     <h3 class="text-primary mb-4">👤 <?= htmlspecialchars($user['name']) ?>'s Profile</h3>
     <p><strong>Email:</strong> <?= htmlspecialchars($user['email']) ?></p>
     <p><strong>Birthdate:</strong> <?= htmlspecialchars($user['birthdate']) ?></p>
     <p><strong>Gender:</strong> <?= htmlspecialchars($user['gender']) ?></p>
     <a href="index.php" class="btn btn-secondary mt-3">← Back to Home</a>
     <a href="logout.php" class="btn btn-danger mt-3 float-end">Log Out</a>
+
   </div>
 </body>
 </html>

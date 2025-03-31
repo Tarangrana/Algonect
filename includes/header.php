@@ -28,7 +28,8 @@ $isLoggedIn = isset($_SESSION['user_id']);
         <ul class="dropdown-menu dropdown-menu-end shadow-sm mt-2">
           <li><a class="dropdown-item" href="profile.php">Profile</a></li>
           <li><hr class="dropdown-divider"></li>
-          <li><a class="dropdown-item text-danger" href="logout.php">Sign Out</a></li>
+          <li><a href="#" class="btn btn-outline-danger" onclick="confirmLogout()">Sign out</a>
+
         </ul>
       </div>
     <?php else: ?>

@@ -51,7 +51,7 @@
 
     <?php
 require_once 'includes/db_connect.php';
-$sql = "SELECT posts.*, users_info.name FROM posts 
+$sql = "SELECT posts.*, users_info.name, users_info.profile_pic FROM posts 
         JOIN users_info ON posts.user_id = users_info.id 
         ORDER BY posts.created_at DESC";
 
@@ -62,7 +62,11 @@ while ($row = $result->fetch_assoc()):
 ?>
   <div class="post-card p-4 mb-4">
     <div class="d-flex align-items-center mb-3">
-      <img src="assets/images/default-pfp.png" class="rounded-circle me-3" width="40" height="40" />
+    <?php
+$picPath = !empty($row['profile_pic']) ? "pics/" . $row['profile_pic'] : "assets/images/default-pfp.png";
+?>
+<img src="<?= $picPath ?>" class="rounded-circle me-3" width="40" height="40" />
+
       <div>
         <div class="fw-semibold"><?= htmlspecialchars($row['name']) ?></div>
         <small class="text-muted"><?= date("d M, Y", strtotime($row['created_at'])) ?> • <span class="text-primary">#<?= htmlspecialchars($row['tag']) ?></span></small>
@@ -151,6 +155,14 @@ while ($row = $result->fetch_assoc()):
     });
   }
 </script>
+<script>
+  function confirmLogout() {
+    if (confirm("Are you sure you want to sign out?")) {
+      window.location.href = "logout.php";
+    }
+  }
+</script>
+
 
 </body>
 </html>
