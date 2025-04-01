@@ -46,6 +46,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             // ✅ Login success
             $_SESSION['user_id'] = $user['id'];
             $_SESSION['name'] = $user['name'];
+            $_SESSION['profile_pic'] = !empty($user['profile_pic']) ? $user['profile_pic'] : 'pics/default-pfp.png';
 
             echo "<script>alert('Login successful!'); window.location.href='index.php';</script>";
             exit;

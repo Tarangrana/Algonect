@@ -12,15 +12,18 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_FILES['profile_pic'])) {
     $file = $_FILES['profile_pic'];
     $fileName = basename($file['name']);
     $uniqueName = uniqid() . '_' . $fileName;
-    $targetPath = "../pics/" . $uniqueName;
+    
+    // ✅ Save full relative path
+    $relativePath = "pics/" . $uniqueName;
+    $targetPath = "../" . $relativePath;
 
     if (move_uploaded_file($file['tmp_name'], $targetPath)) {
         $sql = "UPDATE users_info SET profile_pic = ? WHERE id = ?";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("si", $uniqueName, $userId);
+        $stmt->bind_param("si", $relativePath, $userId); // ✅ Save full path now
 
         if ($stmt->execute()) {
-            $_SESSION['profile_pic'] = "pics/" . $uniqueName;
+            $_SESSION['profile_pic'] = $relativePath; // ✅ Keep it consistent
             header("Location: ../profile.php");
             exit;
         } else {

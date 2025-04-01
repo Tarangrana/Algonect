@@ -62,9 +62,11 @@ while ($row = $result->fetch_assoc()):
 ?>
   <div class="post-card p-4 mb-4">
     <div class="d-flex align-items-center mb-3">
-    <?php
-$picPath = !empty($row['profile_pic']) ? "pics/" . $row['profile_pic'] : "assets/images/default-pfp.png";
-?>
+    <?php $picPath = (!empty($row['profile_pic']) && strpos($row['profile_pic'], 'pics/') !== 0)
+           ? "pics/" . $row['profile_pic']
+           : (!empty($row['profile_pic']) ? $row['profile_pic'] : "pics/default-pfp.png");
+           ?>
+
 <img src="<?= $picPath ?>" class="rounded-circle me-3" width="40" height="40" />
 
       <div>
@@ -97,7 +99,11 @@ $picPath = !empty($row['profile_pic']) ? "pics/" . $row['profile_pic'] : "assets
 
           <!-- Profile + Tag Selector -->
           <div class="d-flex align-items-center mb-3">
-            <img src="<?= $_SESSION['profile_pic'] ?? 'assets/images/default-pfp.png' ?>" width="45" height="45" class="rounded-circle me-2">
+          <?php
+$profilePic = !empty($_SESSION['profile_pic']) ? 'pics/' . $_SESSION['profile_pic'] : 'pics/default-pfp.png';
+?>
+<img src="<?= $profilePic ?>" width="45" height="45" class="rounded-circle me-3" alt="Profile Picture">
+
             <span class="fw-semibold"><?= $_SESSION['name'] ?? 'Tarang Rana' ?></span>
             <span class="ms-2 text-muted">in</span>
             <select name="tag" class="form-select ms-2 w-auto" required>
