@@ -11,6 +11,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['post_id'])) {
   $post_id = $_POST['post_id'];
   $user_id = $_SESSION['user_id'];
 
+  // ✅ Fetch the image path before deleting anything
+  $imgStmt = $conn->prepare("SELECT image_path FROM posts WHERE id = ? AND user_id = ?");
+  if ($imgStmt) {
+    $imgStmt->bind_param("ii", $post_id, $user_id);
+    $imgStmt->execute();
+    $imgStmt->bind_result($image_path);
+    $imgStmt->fetch();
+    $imgStmt->close();
+  }
+
   // ✅ Confirm the post belongs to the logged-in user
   $check = $conn->prepare("SELECT id FROM posts WHERE id = ? AND user_id = ?");
   if (!$check) {
@@ -37,12 +47,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['post_id'])) {
       $commentStmt->close();
     }
 
-    // ✅ Finally, delete the post itself
+    // ✅ Delete the post itself
     $delete = $conn->prepare("DELETE FROM posts WHERE id = ?");
     if ($delete) {
       $delete->bind_param("i", $post_id);
       $delete->execute();
       $delete->close();
+    }
+
+    // ✅ Remove the image file from the server (if it exists)
+    if (!empty($image_path) && file_exists("../" . $image_path)) {
+      unlink("../" . $image_path);
     }
   }
 

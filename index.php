@@ -1,3 +1,12 @@
+<?php
+session_start();
+
+if (!isset($_SESSION['user_id'])) {
+  header("Location: login.php");
+  exit();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -79,6 +88,12 @@ while ($row = $result->fetch_assoc()):
     </div>
     <h6 class="fw-bold"><?= htmlspecialchars($row['title']) ?></h6>
     <p class="text-muted"><?= nl2br(htmlspecialchars($row['content'])) ?></p>
+    <?php if (!empty($row['image_path'])): ?>
+  <img src="<?= htmlspecialchars($row['image_path']) ?>" 
+       class="img-fluid rounded mb-3" 
+       style="max-height: 400px; object-fit: cover;" 
+       alt="Post Image">
+<?php endif; ?>
     <!-- Comments Section -->
 <form action="php/add_comment.php" method="POST" class="mb-3">
   <input type="hidden" name="post_id" value="<?= $row['id'] ?>">
@@ -168,17 +183,17 @@ $likeQuery->close();
           <!-- Content -->
           <textarea name="content" class="form-control mb-3 rounded" rows="5" placeholder="What do you want to talk about..." required></textarea>
 
-          <!-- Photo Upload -->
-          <div class="mb-3 text-muted">
-            <i class="bi bi-image me-1"></i>
-            Add photo
-            <input type="file" name="photo" class="form-control mt-2" disabled>
-          </div>
+         <!-- Add Photo Upload and Preview -->
+<div class="mb-3">
+  <label class="form-label fw-semibold">Add photos</label>
+  <input type="file" name="post_image" class="form-control" accept="image/*" onchange="previewSingleImage(event)">
+<div id="singlePreview" class="mt-2"></div>
 
-          <div class="text-end">
-            <button type="submit" class="btn btn-primary px-4 rounded-pill">Post</button>
-          </div>
-
+  <div id="imagePreviewContainer" class="d-flex flex-wrap gap-2 mt-2"></div>
+</div>
+<div class="text-end">
+  <button type="submit" class="btn btn-primary px-4 rounded-pill">Post</button>
+</div>
         </form>
 
       </div>
@@ -214,6 +229,8 @@ $likeQuery->close();
     }
   }
 </script>
+<script src="js/previewImages.js"></script>
+
 
 </body>
 </html>

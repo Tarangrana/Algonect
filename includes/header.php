@@ -1,7 +1,11 @@
 <?php
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+  session_start();
+}
+
 $isLoggedIn = isset($_SESSION['user_id']);
 ?>
+
 
 <!-- Fixed Header -->
 <header>
@@ -29,7 +33,7 @@ $isLoggedIn = isset($_SESSION['user_id']);
           <ul class="dropdown-menu dropdown-menu-end shadow-sm mt-2">
             <li><a class="dropdown-item" href="profile.php">Profile</a></li>
             <li><hr class="dropdown-divider"></li>
-            <li><a href="#" class="btn btn-outline-danger" onclick="confirmLogout()">Sign out</a></li>
+            <li><a href="#" class="btn btn-outline-danger px-4 py-1" style="margin: 0 auto;" onclick="confirmLogout()">Sign out</a></li>
           </ul>
         </div>
       <?php else: ?>

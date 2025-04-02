@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once 'includes\db_connect.php';
+require_once 'includes/db_connect.php';
 
 if (!isset($_SESSION['user_id'])) {
     header("Location: login.php");
@@ -14,8 +14,15 @@ $stmt->bind_param("i", $userId);
 $stmt->execute();
 $result = $stmt->get_result();
 $user = $result->fetch_assoc();
-?>
 
+// Count posts
+$postCountStmt = $conn->prepare("SELECT COUNT(*) AS total FROM posts WHERE user_id = ?");
+$postCountStmt->bind_param("i", $userId);
+$postCountStmt->execute();
+$postCountResult = $postCountStmt->get_result();
+$postData = $postCountResult->fetch_assoc();
+$postCount = $postData['total'];
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,29 +32,41 @@ $user = $result->fetch_assoc();
   <style>
     .profile-box {
       max-width: 600px;
-      margin: 60px auto;
+      margin: 70px auto;
       background: #fff;
       padding: 30px;
       border-radius: 10px;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    }
+    .profile-pic {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 50%;
+      margin-bottom: 15px;
+    }
+    .center {
+      text-align: center;
     }
   </style>
 </head>
 <body style="background-color:#f0f2f5;">
-  <div class="profile-box">
-  <form action="php/update_profile_pic.php" method="POST" enctype="multipart/form-data">
-  <label for="profile_pic" class="form-label">Update Profile Picture:</label>
-  <input type="file" name="profile_pic" class="form-control mb-2" accept="image/*" required>
-  <button type="submit" class="btn btn-primary">Upload</button>
-</form>
+  <div class="profile-box text-center">
+    <img src="<?= $_SESSION['profile_pic'] ?? 'assets/images/default-pfp.png' ?>" class="profile-pic" alt="Profile Picture">
+    
+    <form action="php/update_profile_pic.php" method="POST" enctype="multipart/form-data" class="mb-4">
+      <input type="file" name="profile_pic" class="form-control mb-2" accept="image/*" required>
+      <button type="submit" class="btn btn-sm btn-primary">Update Picture</button>
+    </form>
 
-    <h3 class="text-primary mb-4">👤 <?= htmlspecialchars($user['name']) ?>'s Profile</h3>
+    <h4 class="text-primary"><?= htmlspecialchars($user['name']) ?></h4>
     <p><strong>Email:</strong> <?= htmlspecialchars($user['email']) ?></p>
     <p><strong>Birthdate:</strong> <?= htmlspecialchars($user['birthdate']) ?></p>
     <p><strong>Gender:</strong> <?= htmlspecialchars($user['gender']) ?></p>
-    <a href="index.php" class="btn btn-secondary mt-3">← Back to Home</a>
-    <a href="logout.php" class="btn btn-danger mt-3 float-end">Log Out</a>
+    <p><strong>Posts:</strong> <?= $postCount ?></p>
 
+    <a href="index.php" class="btn btn-outline-secondary mt-3">← Back</a>
+    <a href="logout.php" class="btn btn-outline-danger mt-3 ms-2">Log Out</a>
   </div>
 </body>
 </html>
