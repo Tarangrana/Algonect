@@ -49,7 +49,9 @@
   <div class="row">
 
     <!-- Left Sidebar -->
-    <?php include 'includes/left.php'; ?>
+    <div class="col-md-2 p-0">
+  <?php include 'includes/left.php'; ?>
+</div>
 
     <!-- Center Column (Main Events Section) -->
     <div class="col-md-6 main-feed">
@@ -72,7 +74,10 @@
     </div>
 
     <!-- Right Sidebar -->
-    <?php include 'includes/right.php'; ?>
+    <div class="col-md-2 p-0">
+  <?php include 'includes/right.php'; ?>
+</div>
+
 
   </div>
 </div>

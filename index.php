@@ -30,9 +30,12 @@
 <!-- Main Grid -->
 <div class="container-fluid">
   <div class="row">
+    
 
     <!-- Left Sidebar -->
-    <?php include 'includes/left.php'; ?>
+    <div class="col-md-2 p-0">
+  <?php include 'includes/left.php'; ?>
+</div>
 
     <!-- Center Feed -->
     <div class="col-md-6 main-feed">
@@ -76,13 +79,58 @@ while ($row = $result->fetch_assoc()):
     </div>
     <h6 class="fw-bold"><?= htmlspecialchars($row['title']) ?></h6>
     <p class="text-muted"><?= nl2br(htmlspecialchars($row['content'])) ?></p>
+    <!-- Comments Section -->
+<form action="php/add_comment.php" method="POST" class="mb-3">
+  <input type="hidden" name="post_id" value="<?= $row['id'] ?>">
+  <textarea name="content" class="form-control mb-2" rows="2" placeholder="Add a comment..." required></textarea>
+  <button type="submit" class="btn btn-sm btn-primary">Comment</button>
+</form>
+
+<?php
+  $commentQuery = $conn->prepare("SELECT c.content, u.name FROM comments c JOIN users_info u ON c.user_id = u.id WHERE c.post_id = ? ORDER BY c.created_at DESC");
+  $commentQuery->bind_param("i", $row['id']);
+  $commentQuery->execute();
+  $commentResult = $commentQuery->get_result();
+  while ($comment = $commentResult->fetch_assoc()):
+?>
+  <div class="mb-2 ms-3">
+    <strong><?= htmlspecialchars($comment['name']) ?>:</strong> <?= htmlspecialchars($comment['content']) ?>
   </div>
+<?php endwhile; ?>
+<form action="php/like_post.php" method="POST" class="d-inline">
+  <input type="hidden" name="post_id" value="<?= $row['id'] ?>">
+  <button type="submit" class="btn btn-sm btn-outline-danger">❤️ Like</button>
+</form>
+<?php
+$likeQuery = $conn->prepare("SELECT COUNT(*) AS like_count FROM likes WHERE post_id = ?");
+$likeQuery->bind_param("i", $row['id']);
+$likeQuery->execute();
+$likeQuery->bind_result($likeCount);
+$likeQuery->fetch();
+$likeQuery->close();
+?>
+<span class="ms-2"><?= $likeCount ?> likes</span>
+<?php if (isset($_SESSION['user_id']) && $_SESSION['user_id'] == $row['user_id']): ?>
+  <form action="php/delete_post.php" method="POST" onsubmit="return confirm('Are you sure you want to delete this post?');" class="d-inline">
+    <input type="hidden" name="post_id" value="<?= $row['id'] ?>">
+    <button type="submit" class="btn btn-sm btn-outline-danger">🗑️ Delete</button>
+  </form>
+<?php endif; ?>
+
+
+
+  </div>
+
+
+
 <?php endwhile; ?>
 
     </div>
 
     <!-- Right Sidebar -->
-    <?php include 'includes/right.php'; ?>
+    <div class="col-md-2 p-0">
+  <?php include 'includes/right.php'; ?>
+</div>
 
   </div>
 </div>
@@ -99,10 +147,8 @@ while ($row = $result->fetch_assoc()):
 
           <!-- Profile + Tag Selector -->
           <div class="d-flex align-items-center mb-3">
-          <?php
-$profilePic = !empty($_SESSION['profile_pic']) ? 'pics/' . $_SESSION['profile_pic'] : 'pics/default-pfp.png';
-?>
-<img src="<?= $profilePic ?>" width="45" height="45" class="rounded-circle me-3" alt="Profile Picture">
+          <img src="<?= $_SESSION['profile_pic'] ?? 'assets/images/default-pfp.png' ?>" width="45" height="45" class="rounded-circle me-3" alt="Profile Picture">
+  
 
             <span class="fw-semibold"><?= $_SESSION['name'] ?? 'Tarang Rana' ?></span>
             <span class="ms-2 text-muted">in</span>
@@ -168,7 +214,6 @@ $profilePic = !empty($_SESSION['profile_pic']) ? 'pics/' . $_SESSION['profile_pi
     }
   }
 </script>
-
 
 </body>
 </html>

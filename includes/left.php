@@ -1,4 +1,4 @@
-<aside class="col-md-2 mb-4">
+<aside class="left-sidebar">
   <div class="p-3 rounded shadow-sm sidebar">
     <h6 class="fw-semibold mb-3">Menu</h6>
     <ul class="nav flex-column">
