@@ -20,10 +20,18 @@
       background: white;
       border-radius: 10px;
       box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-    }
+          }
+          .auth-bg {
+  background-image: url("img.jpg"); /* Adjust path if needed */
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+}
+
   </style>
 </head>
-<body>
+<body class="auth-bg">
 
 <?php
 session_start();
