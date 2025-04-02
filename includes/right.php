@@ -7,13 +7,14 @@
     require_once 'includes/db_connect.php';
 
     $leaderboardQuery = "
-        SELECT u.name, u.profile_pic, COUNT(p.id) AS post_count
-        FROM users_info u
-        JOIN posts p ON u.id = p.user_id
-        GROUP BY u.id
-        ORDER BY post_count DESC
-        LIMIT 5
-    ";
+    SELECT u.id, u.name, u.profile_pic, COUNT(p.id) AS post_count
+    FROM users_info u
+    JOIN posts p ON u.id = p.user_id
+    GROUP BY u.id
+    ORDER BY post_count DESC
+    LIMIT 5
+";
+
 
     $result = $conn->query($leaderboardQuery);
     ?>
@@ -27,10 +28,13 @@
            : (!empty($row['profile_pic']) ? $row['profile_pic'] : "pics/default-pfp.png");
            ?>
             <img src="<?= $picPath ?>" class="rounded-circle me-3" width="40" height="40" />
-            <div>
-              <div class="fw-semibold"><?= htmlspecialchars($row['name']) ?></div>
-              <small class="text-muted"><?= $row['post_count'] ?> posts</small>
-            </div>
+            <div class="d-flex flex-column">
+  <a href="php/user_profile.php?id=<?= $row['id'] ?>" class="fw-semibold text-decoration-none text-dark">
+    <?= htmlspecialchars($row['name']) ?>
+  </a>
+  <small class="text-muted"><?= $row['post_count'] ?> posts</small>
+</div>
+
           </li>
         <?php endwhile; ?>
       </ol>
