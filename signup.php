@@ -29,6 +29,7 @@
 require_once 'includes\db_connect.php';
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
+  // Get form data
     $name     = $_POST['name'];
     $email    = $_POST['email'];
     $password = $_POST['password'];
@@ -42,9 +43,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $birth    = $_POST['birth_year'] . '-' . $month . '-' . str_pad($_POST['birth_day'], 2, "0", STR_PAD_LEFT);
     $gender   = $_POST['gender'];
 
+    // Password validation: Match check
     if ($password !== $confirm) {
         echo "<script>alert('Passwords do not match');</script>";
     } else {
+      // Insert user into database if passwords match
+        // Check if email is valid and belongs to algomau.ca domain
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
         $stmt = $conn->prepare("INSERT INTO users_info (name, email, password, birthdate, gender) VALUES (?, ?, ?, ?, ?)");

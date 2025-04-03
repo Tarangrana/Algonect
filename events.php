@@ -47,6 +47,28 @@
       font-weight: 500;
       color: var(--link-color);
     }
+
+    .left-sidebar,
+    .right-sidebar {
+      position: fixed;
+      top: 80px;
+      height: calc(100vh - 80px);
+      overflow: hidden;
+    }
+
+    .left-sidebar {
+      left: 18px;
+    }
+
+    .right-sidebar {
+      right: 18px;
+    }
+
+    .main-feed {
+      margin-left: 300px;
+      margin-right: 300px;
+      margin-top: 80px;
+    }
   </style>
 </head>
 <body>

@@ -1,6 +1,9 @@
+<!-- Vertical navigation -->
+
 <ul class="nav flex-column">
   <li class="nav-item"><a href="index.php" class="nav-link">🏠 Home</a></li>
   <li class="nav-item">
+    <!-- Spaces Dropdown -->
     <a class="nav-link d-flex justify-content-between align-items-center" data-bs-toggle="collapse" href="#spacesCollapse" role="button" aria-expanded="true" aria-controls="spacesCollapse">
       Spaces <span>&#9662;</span>
     </a>

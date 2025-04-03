@@ -4,8 +4,12 @@
     <h6 class="fw-semibold text-primary mb-3">🏆 Leaderboard</h6>
 
     <?php
+    // Include database connection
+    // Make sure to adjust the path as necessary
     require_once 'includes/db_connect.php';
 
+
+    // Query to get the top 5 users based on post count  
     $leaderboardQuery = "
     SELECT u.id, u.name, u.profile_pic, COUNT(p.id) AS post_count
     FROM users_info u
@@ -15,14 +19,17 @@
     LIMIT 5
 ";
 
-
+    // Execute the query
     $result = $conn->query($leaderboardQuery);
     ?>
-
-    <?php if ($result && $result->num_rows > 0): ?>
+   
+    <?php if ($result && $result->num_rows > 0):  // Check if the query was successful and if there are results?> 
       <ol class="ps-2">
-        <?php while ($row = $result->fetch_assoc()): ?>
+
+        <?php while ($row = $result->fetch_assoc()): //Looping throught each users?>
           <li class="d-flex align-items-center mb-3">
+            
+            <!-- User Profile Picture and Name -->
           <?php $picPath = (!empty($row['profile_pic']) && strpos($row['profile_pic'], 'pics/') !== 0)
            ? "pics/" . $row['profile_pic']
            : (!empty($row['profile_pic']) ? $row['profile_pic'] : "pics/default-pfp.png");

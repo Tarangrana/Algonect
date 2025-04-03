@@ -8,8 +8,12 @@ if (!isset($_GET['id'])) {
     exit;
 }
 
+// Extract ID and Fetch user data
+// Assuming the ID is passed as a GET parameter, e.g., user_profile.php?id=1
 $user_id = (int)$_GET['id'];
 
+
+// Convert to int for security
 $stmt = $conn->prepare("SELECT * FROM users_info WHERE id = ?");
 $stmt->bind_param("i", $user_id);
 $stmt->execute();

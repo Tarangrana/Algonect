@@ -1,6 +1,7 @@
 <?php
 session_start();
 
+// Check if the user is logged in, if not redirect to login page
 if (!isset($_SESSION['user_id'])) {
   header("Location: login.php");
   exit();
@@ -19,6 +20,7 @@ if (!isset($_SESSION['user_id'])) {
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="css/style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+  
   <style>
     .left-sidebar,
     .right-sidebar {
@@ -29,11 +31,11 @@ if (!isset($_SESSION['user_id'])) {
     }
 
     .left-sidebar {
-      left: 0;
+      left: 18px;
     }
 
     .right-sidebar {
-      right: 0;
+      right: 18px;
     }
 
     .main-feed {
@@ -59,6 +61,7 @@ if (!isset($_SESSION['user_id'])) {
 
         <!-- Center Feed -->
         <div class="main-feed" id="mainFeed">
+
         <!-- Post Input -->
         <div class="d-flex align-items-center mb-3 p-3 rounded shadow-sm post-input-card">
   <img src="<?= $_SESSION['profile_pic'] ?? 'assets/images/default-pfp.png' ?>" width="45" height="45" class="rounded-circle me-3" alt="Profile Picture">
@@ -71,6 +74,7 @@ if (!isset($_SESSION['user_id'])) {
 </div>
 
 
+        <!-- Posts -->
           <?php
           require_once 'includes/db_connect.php';
           $tagFilter = $_GET['tag'] ?? null;
@@ -110,30 +114,42 @@ if (!isset($_SESSION['user_id'])) {
               </form>
 
               <?php
-              $commentQuery = $conn->prepare("SELECT c.content, u.name FROM comments c JOIN users_info u ON c.user_id = u.id WHERE c.post_id = ? ORDER BY c.created_at DESC");
+              $commentQuery = $conn->prepare("SELECT c.content, u.name, u.profile_pic FROM comments c JOIN users_info u ON c.user_id = u.id WHERE c.post_id = ? ORDER BY c.created_at DESC");
+
               $commentQuery->bind_param("i", $row['id']);
               $commentQuery->execute();
               $commentResult = $commentQuery->get_result();
               while ($comment = $commentResult->fetch_assoc()):
               ?>
-                <div class="mb-2 ms-3">
-                  <strong><?= htmlspecialchars($comment['name']) ?>:</strong> <?= htmlspecialchars($comment['content']) ?>
-                </div>
+                <?php
+$commentPic = (!empty($comment['profile_pic']) && strpos($comment['profile_pic'], 'pics/') !== 0)
+  ? "pics/" . $comment['profile_pic']
+  : (!empty($comment['profile_pic']) ? $comment['profile_pic'] : "pics/default-pfp.png");
+?>
+<div class="d-flex align-items-start mb-2 ms-3">
+  <img src="<?= $commentPic ?>" class="rounded-circle me-2" width="30" height="30" alt="Commenter">
+  <div>
+    <strong><?= htmlspecialchars($comment['name']) ?></strong>
+    <div><?= htmlspecialchars($comment['content']) ?></div>
+  </div>
+</div>
+
               <?php endwhile; ?>
 
-              <form action="php/like_post.php" method="POST" class="d-inline">
-                <input type="hidden" name="post_id" value="<?= $row['id'] ?>">
-                <button type="submit" class="btn btn-sm btn-outline-danger">❤️ Like</button>
-              </form>
-              <?php
-              $likeQuery = $conn->prepare("SELECT COUNT(*) AS like_count FROM likes WHERE post_id = ?");
-              $likeQuery->bind_param("i", $row['id']);
-              $likeQuery->execute();
-              $likeQuery->bind_result($likeCount);
-              $likeQuery->fetch();
-              $likeQuery->close();
-              ?>
-              <span class="ms-2"><?= $likeCount ?> likes</span>
+              <!-- Like Button and Count -->
+
+              <button class="btn btn-sm btn-outline-danger like-btn" data-post-id="<?= $row['id'] ?>">❤️ Like</button>
+<span class="ms-2 like-count" id="like-count-<?= $row['id'] ?>">
+  <?php
+    $likeStmt = $conn->prepare("SELECT COUNT(*) FROM likes WHERE post_id = ?");
+    $likeStmt->bind_param("i", $row['id']);
+    $likeStmt->execute();
+    $likeStmt->bind_result($likeCount);
+    $likeStmt->fetch();
+    $likeStmt->close();
+    echo "$likeCount likes";
+  ?>
+</span>
               <?php if (isset($_SESSION['user_id']) && $_SESSION['user_id'] == $row['user_id']): ?>
                 <form action="php/delete_post.php" method="POST" onsubmit="return confirm('Are you sure you want to delete this post?');" class="d-inline">
                   <input type="hidden" name="post_id" value="<?= $row['id'] ?>">
@@ -150,6 +166,7 @@ if (!isset($_SESSION['user_id'])) {
         </div>
       </div>
     </div>
+
     <!-- Creating Post -->
 <div class="modal fade" id="createPostModal" tabindex="-1" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
@@ -198,7 +215,10 @@ if (!isset($_SESSION['user_id'])) {
 
   <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/likeHandler.js"></script>
   <script src="js/previewImages.js"></script>
+
+  <!-- Dark Mode Toggle -->
   <script>
     const toggle = document.getElementById('darkModeToggle');
     if (localStorage.getItem('darkMode') === 'enabled') {
@@ -231,6 +251,7 @@ if (!isset($_SESSION['user_id'])) {
     });
   </script>
   <script>
+    // Fucntion to load resources
   function loadResources() {
     const mainFeed = document.getElementById('mainFeed');
     mainFeed.innerHTML = `

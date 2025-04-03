@@ -14,8 +14,8 @@ body.dark-mode {
   --link-color: #58a6ff;
 }
 
-
-html, body {
+html,
+body {
   height: 100%;
   margin: 0;
   background-color: var(--bg-color);
@@ -24,10 +24,11 @@ html, body {
 }
 
 /* Ensures the entire page background remains consistent */
-body, .container-fluid, .layout-wrapper {
+body,
+.container-fluid,
+.layout-wrapper {
   background-color: var(--bg-color);
 }
-
 
 .flex-fill {
   flex: 1 1 auto;
@@ -108,11 +109,11 @@ header {
 }
 
 .left-sidebar {
-  left: 0;
+  left: 10px;
 }
 
 .right-sidebar {
-  right: 0;
+  right: 10px;
 }
 
 /* Feed (center content) */
@@ -191,11 +192,11 @@ footer {
   }
 
   .left-sidebar {
-    left: 10px;
+    left: -10px;
   }
 
   .right-sidebar {
-    right: 10px;
+    right: -10px;
   }
 }
 

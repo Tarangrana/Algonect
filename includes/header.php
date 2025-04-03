@@ -1,3 +1,6 @@
+<!-- Header for AlgoNect -->
+<!-- Session check to determine if the user is logged in -->
+
 <?php
 if (session_status() === PHP_SESSION_NONE) {
   session_start();
@@ -43,16 +46,18 @@ $isLoggedIn = isset($_SESSION['user_id']);
                aria-expanded="false" 
                style="cursor:pointer; border: 2px solid transparent;">
     
-          <ul class="dropdown-menu dropdown-menu-end shadow-sm mt-2">
-            <li><a class="dropdown-item" href="profile.php">Profile</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a href="#" class="btn btn-outline-danger px-4 py-1" style="margin: 0 auto;" onclick="confirmLogout()">Sign out</a></li>
-          </ul>
-        </div>
+              <ul class="dropdown-menu dropdown-menu-end shadow-sm mt-2">
+              <li><a class="dropdown-item" href="profile.php">Profile</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a href="logout.php" class="btn btn-outline-danger px-4 py-1" style="margin: 0 auto;" onclick="confirmLogout()">Sign out</a></li>
+              </ul>
+              </div>
+
       <?php else: ?>
         <a href="login.php" class="btn btn-outline-primary">Log in</a>
         <a href="signup.php" class="btn btn-primary">Sign Up</a>
       <?php endif; ?>
+
     </div>
   </nav>
 </header>

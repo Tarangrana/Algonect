@@ -20,11 +20,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $fileName = time() . "_" . basename($_FILES['post_image']['name']);
         $targetPath = $uploadDir . $fileName;
 
+        // Check if the upload directory exists, if not create it
         if (move_uploaded_file($_FILES['post_image']['tmp_name'], $targetPath)) {
             $imagePath = "post_images/" . $fileName;
         }
     }
 
+    // Insert the post into the database
     if ($title && $content && $tag) {
         $stmt = $conn->prepare("INSERT INTO posts (user_id, title, content, tag, image_path) VALUES (?, ?, ?, ?, ?)");
         $stmt->bind_param("issss", $user_id, $title, $content, $tag, $imagePath);
@@ -41,6 +43,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         echo "Missing fields.";
     }
 
-    $conn->close();
+    $conn->close(); // Close the database connection
 }
 ?>

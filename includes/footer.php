@@ -1,4 +1,7 @@
+<!-- Footer Section -->
 <footer class="text-center mt-5 mb-3 small text-muted">
+
+  <!-- Social Media Links -->
   <div class="d-flex justify-content-center flex-wrap gap-3 mb-2">
     <a href="about.php" class="text-muted text-decoration-none">About</a>
     <a href="community.php" class="text-muted text-decoration-none">Community Guidelines</a>
