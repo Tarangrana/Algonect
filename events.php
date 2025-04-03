@@ -5,6 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Events - AlgoNect</title>
 
+  <!-- Instant Dark Mode Before CSS Loads -->
+  <script>
+    if (localStorage.getItem('darkMode') === 'enabled') {
+      document.documentElement.classList.add('dark-mode');
+      document.body?.classList?.add('dark-mode');
+    }
+  </script>
+
   <!-- Styles -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet"/>
@@ -46,15 +54,15 @@
 <?php include 'includes/header.php'; ?>
 
 <div class="container-fluid">
-  <div class="row">
+  <div class="layout-wrapper d-flex w-100 justify-content-between" style="max-width: 1400px; margin: 0 auto;">
 
     <!-- Left Sidebar -->
-    <div class="col-md-2 p-0">
-  <?php include 'includes/left.php'; ?>
-</div>
+    <div id="leftSidebar" class="left-sidebar">
+      <?php include 'includes/left.php'; ?>
+    </div>
 
     <!-- Center Column (Main Events Section) -->
-    <div class="col-md-6 main-feed">
+    <div class="main-feed" id="mainFeed">
       <h4 class="fw-bold text-primary mb-3">Events</h4>
       <p class="text-muted mb-4">Past Events</p>
 
@@ -74,10 +82,9 @@
     </div>
 
     <!-- Right Sidebar -->
-    <div class="col-md-2 p-0">
-  <?php include 'includes/right.php'; ?>
-</div>
-
+    <div id="rightSidebar" class="right-sidebar">
+      <?php include 'includes/right.php'; ?>
+    </div>
 
   </div>
 </div>
@@ -88,10 +95,25 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
   const toggle = document.getElementById('darkModeToggle');
+  if (localStorage.getItem('darkMode') === 'enabled') {
+    document.body.classList.add('dark-mode');
+    if (toggle) toggle.checked = true;
+  }
+
   if (toggle) {
     toggle.addEventListener('change', () => {
       document.body.classList.toggle('dark-mode');
+      localStorage.setItem('darkMode', document.body.classList.contains('dark-mode') ? 'enabled' : 'disabled');
     });
+  }
+
+  // Optional: Make Resources work here too
+  function loadResources() {
+    const mainFeed = document.getElementById('mainFeed');
+    mainFeed.innerHTML = `
+      <h4 class="mb-3 fw-bold">Resources</h4>
+      <iframe src="https://algomau.ca/" width="100%" height="800" style="border: none; border-radius: 10px;"></iframe>
+    `;
   }
 </script>
 

@@ -6,13 +6,26 @@ if (session_status() === PHP_SESSION_NONE) {
 $isLoggedIn = isset($_SESSION['user_id']);
 ?>
 
-
 <!-- Fixed Header -->
 <header>
-  <nav class="navbar navbar-expand-lg shadow-sm px-4 mb-3 bg-white">
-    <a class="navbar-brand fw-bold text-primary" href="index.php">AlgoNect</a>
+  <nav class="navbar navbar-expand-lg shadow-sm px-4 mb-3 bg-white justify-content-between">
 
+    <!-- Left Sidebar Toggle Button (leftmost, only visible on small screens) -->
+    <div class="d-xl-none">
+      <button id="leftToggle" class="btn btn-outline-secondary btn-sm">☰</button>
+    </div>
+
+    <!-- Logo -->
+    <a class="navbar-brand fw-bold text-primary mx-3" href="index.php">AlgoNect</a>
+
+    <!-- Right side items -->
     <div class="ms-auto d-flex align-items-center gap-3">
+
+      <!-- Right Sidebar Toggle Button (rightmost on small screens) -->
+      <div class="d-xl-none">
+        <button id="rightToggle" class="btn btn-outline-secondary btn-sm">🏆</button>
+      </div>
+
       <!-- Dark mode toggle -->
       <div class="form-check form-switch">
         <input class="form-check-input" type="checkbox" id="darkModeToggle">

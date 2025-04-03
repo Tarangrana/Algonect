@@ -29,8 +29,8 @@
            ?>
             <img src="<?= $picPath ?>" class="rounded-circle me-3" width="40" height="40" />
             <div class="d-flex flex-column">
-  <a href="php/user_profile.php?id=<?= $row['id'] ?>" class="fw-semibold text-decoration-none text-dark">
-    <?= htmlspecialchars($row['name']) ?>
+            <a href="php/user_profile.php?id=<?= $row['id'] ?>" class="fw-semibold text-decoration-none" style="color: var(--text-color);">
+            <?= htmlspecialchars($row['name']) ?>
   </a>
   <small class="text-muted"><?= $row['post_count'] ?> posts</small>
 </div>
