@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Community Guidelines - Iscicle</title>
+  <title>Community Guidelines - AlgoNect</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
@@ -59,50 +59,46 @@
 <div class="guidelines-section">
   <h1>Community Guidelines</h1>
   <p>
-    Iscicle is a place for international students and allies to collaborate, converse, and learn from one another.
-    In order to ensure that this is a safe space, please follow the following guidelines:
+    AlgoNect is a space for Algoma University students to connect, share, and grow together. In order to maintain a positive and respectful environment, please follow the guidelines below.
   </p>
 
-  <h5>Bring your best self</h5>
+  <h5>Be respectful and authentic</h5>
   <p>
-    Bring your best self to Iscicle, and expect others to bring their best selves too!
-    Iscicle is a welcoming and collaborative space for you to learn, share, and grow.
-    Please do not engage in behavior that is inappropriate or harmful, and expect that others will follow these rules as well.
-    If you believe someone is in violation of our guidelines, please let us know at <a href="mailto:support@iscicle.com" class="email-link">support@iscicle.com</a>, or report them via the mobile app.
+    AlgoNect is your university’s digital community lounge. Treat it like one. Share openly, support others, and keep the tone kind and inclusive.
+    Avoid any behavior that could make others feel unsafe or unwelcome.
+    If you witness something inappropriate, please let us know at <a href="mailto:support@algonect.com" class="email-link">support@algonect.com</a>.
   </p>
 
-  <h5>What can I post about?</h5>
+  <h5>What can I post?</h5>
   <p>
-    Anything related to your experience as an international student! Share questions, opportunities, resources, events,
-    personal experiences, advice, and more. This is a safe space where you can be vulnerable and candid — but we still moderate all posts, so keep it respectful.
+    Anything related to your life as a university student! This includes course discussions, advice, daily experiences, questions, rants, fun stories, or helpful resources.
+    All content should align with AlgoNect's mission to foster a supportive academic and social environment.
   </p>
 
-  <h5>What can't I post about?</h5>
+  <h5>What shouldn’t I post?</h5>
   <ul>
-    <li>No spam, advertisements, or solicitations of any kind.</li>
-    <li>No posting the same content in multiple spaces — pick the most relevant one.</li>
-    <li>No harmful content — this includes promotion of violence, hate speech, misinformation, exploitation of minors, self-harm, drugs, illicit activity, trolling, or bullying.</li>
+    <li>No spam, ads, or promotional content.</li>
+    <li>Don't post the same content across multiple tags (spaces) — choose the one that fits best.</li>
+    <li>No content that promotes hate, discrimination, violence, misinformation, bullying, or any form of illegal or harmful activity.</li>
   </ul>
 
   <h5>What are spaces?</h5>
-  <p>Spaces are categories for organizing and discovering posts. Here’s a quick overview:</p>
+  <p>Spaces are categories that help organize posts. Current AlgoNect spaces include:</p>
   <ul>
-    <li><strong>Advice</strong>: Tips, lessons, or wisdom based on your experiences.</li>
-    <li><strong>Meme</strong>: International student struggles? Let it out with humor.</li>
-    <li><strong>Rant</strong>: Vent your frustrations. We’re listening.</li>
-    <li><strong>Storytime</strong>: Share memorable, fun, or insightful moments.</li>
-    <li><strong>Question</strong>: Ask anything — if it ends with a “?”, it belongs here.</li>
-    <li><strong>Wins</strong>: Landed an internship? Made a home-cooked meal? Let’s celebrate with you!</li>
+    <li><strong>General</strong>: Anything that doesn’t fit a specific category.</li>
+    <li><strong>Advice</strong>: Academic tips, mental health help, campus tips, etc.</li>
+    <li><strong>Rant</strong>: Got something to get off your chest? This is the place.</li>
+    <li><strong>Storytime</strong>: Fun, emotional, or random stories from campus life.</li>
+    <li><strong>Question</strong>: Anything you’re wondering about — classes, events, or life.</li>
   </ul>
 
-  <h5>Still have questions?</h5>
+  <h5>Need help or want to report something?</h5>
   <p>
-    Reach out to our team anytime at <a href="mailto:support@iscicle.com" class="email-link">support@iscicle.com</a>.
+    Contact us at <a href="mailto:support@algonect.com" class="email-link">support@algonect.com</a>. We're here to make your experience better.
   </p>
 
   <p class="note">
-    Please note: These guidelines are not exhaustive. We reserve the right to remove content that negatively impacts the community.
-    Repeated violations may lead to content removal, warnings, or account suspension.
+    Please note: These guidelines are subject to updates as the community grows. We reserve the right to remove content that goes against the spirit of the platform. Repeated violations may result in warnings or account suspension.
   </p>
 </div>
 

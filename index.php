@@ -43,6 +43,18 @@ if (!isset($_SESSION['user_id'])) {
       margin-right: 300px;
       margin-top: 80px;
     }
+    body.dark-mode textarea,
+body.dark-mode .form-control {
+  background-color: #1e1e1e;
+  color: #f1f1f1; /* <- This makes the input text light */
+  border: 1px solid #444;
+  border-radius: 8px;
+}
+
+body.dark-mode textarea::placeholder {
+  color: #aaa; /* optional: make placeholder visible in dark mode */
+}
+
   </style>
 </head>
 

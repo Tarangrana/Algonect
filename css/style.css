@@ -222,3 +222,67 @@ footer {
 .navbar .btn:hover {
   opacity: 0.8;
 }
+
+/* Style the modal in dark mode */
+body.dark-mode .modal-content {
+  background-color: #1e1e1e;
+  color: #f1f1f1;
+  border: 1px solid #333;
+}
+
+/* Inputs, textareas, selects inside modal */
+body.dark-mode .modal-content input,
+body.dark-mode .modal-content textarea,
+body.dark-mode .modal-content select {
+  background-color: #2a2a2a;
+  color: #f1f1f1;
+  border: 1px solid #444;
+}
+
+/* Placeholder styling for readability */
+body.dark-mode .modal-content input::placeholder,
+body.dark-mode .modal-content textarea::placeholder {
+  color: #aaa;
+}
+/* Make modal text readable */
+body.dark-mode .modal-content,
+body.dark-mode .modal-content label,
+body.dark-mode .modal-content span,
+body.dark-mode .modal-content select,
+body.dark-mode .modal-content .form-label,
+body.dark-mode .modal-content .fw-semibold,
+body.dark-mode .modal-content .text-muted {
+  color: #f1f1f1 !important;
+}
+
+/* Fix light gray disabled label like “Add photos” */
+body.dark-mode .modal-content .form-label,
+body.dark-mode .modal-content label {
+  color: #e0e0e0 !important;
+}
+
+/* Optional: dropdown inside modal */
+body.dark-mode .modal-content select {
+  background-color: #2a2a2a;
+  border: 1px solid #444;
+}
+
+/* Make everything inside modal dark and readable */
+body.dark-mode .modal-content,
+body.dark-mode .modal-content * {
+  color: #f1f1f1 !important;
+}
+
+/* Optional: Improve visibility of placeholder text */
+body.dark-mode .modal-content input::placeholder,
+body.dark-mode .modal-content textarea::placeholder {
+  color: #aaa;
+}
+
+body.dark-mode input[type="file"],
+body.dark-mode input[type="file"]::-webkit-file-upload-button,
+body.dark-mode select.form-select {
+  background-color: #2a2a2a;
+  color: #f1f1f1;
+  border: 1px solid #444;
+}
