@@ -68,14 +68,14 @@
 
       <!-- Event 1 -->
       <div class="event-card p-3 mb-4">
-        <img src="assets/images/event1.jpg" alt="Resume Workshop" class="event-img">
+        <img src="pics\image.png" alt="Resume Workshop" class="event-img">
         <div class="event-title">What the Heck is a Good Resume? A Workshop with Iren Azra Zou</div>
         <div class="event-date mt-2">Wednesday, Aug. 21st</div>
       </div>
 
       <!-- Event 2 -->
       <div class="event-card p-3 mb-4">
-        <img src="assets/images/event2.jpg" alt="Visa Options" class="event-img">
+        <img src="pics\istockphoto-157383627-612x612.jpg" alt="Visa Options" class="event-img">
         <div class="event-title">Navigating Visa Options for International Student Entrepreneurs</div>
         <div class="event-date mt-2">Saturday, Aug. 10th</div>
       </div>
@@ -116,6 +116,25 @@
     `;
   }
 </script>
+<script>
+  document.getElementById("leftToggle")?.addEventListener("click", () => {
+    const sidebar = document.getElementById("leftSidebar");
+    sidebar.style.display = sidebar.style.display === "block" ? "none" : "block";
+  });
+
+  document.getElementById("rightToggle")?.addEventListener("click", () => {
+    const sidebar = document.getElementById("rightSidebar");
+    sidebar.style.display = sidebar.style.display === "block" ? "none" : "block";
+  });
+
+  window.addEventListener("resize", () => {
+    if (window.innerWidth > 1150) {
+      document.getElementById("leftSidebar").style.display = "";
+      document.getElementById("rightSidebar").style.display = "";
+    }
+  });
+</script>
+
 
 </body>
 </html>

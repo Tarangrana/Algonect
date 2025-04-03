@@ -198,3 +198,26 @@ footer {
     right: 10px;
   }
 }
+
+.custom-dark-input {
+  background-color: var(--card-bg) !important;
+  color: var(--text-color) !important;
+  border: 1px solid var(--muted-color) !important;
+}
+
+.custom-dark-input::placeholder {
+  color: var(--muted-color) !important;
+}
+.navbar {
+  background-color: var(--card-bg) !important;
+  color: var(--text-color) !important;
+}
+
+.navbar .btn,
+.navbar a {
+  color: var(--text-color) !important;
+}
+
+.navbar .btn:hover {
+  opacity: 0.8;
+}

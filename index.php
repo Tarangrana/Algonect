@@ -60,10 +60,16 @@ if (!isset($_SESSION['user_id'])) {
         <!-- Center Feed -->
         <div class="main-feed" id="mainFeed">
         <!-- Post Input -->
-          <div class="d-flex align-items-center mb-3 p-3 bg-white rounded shadow-sm">
-            <img src="<?= $_SESSION['profile_pic'] ?? 'assets/images/default-pfp.png' ?>" width="45" height="45" class="rounded-circle me-3" alt="Profile Picture">
-            <input type="text" class="form-control rounded-pill bg-light border-0 text-muted" placeholder="Create a post..." data-bs-toggle="modal" data-bs-target="#createPostModal" readonly>
-          </div>
+        <div class="d-flex align-items-center mb-3 p-3 rounded shadow-sm post-input-card">
+  <img src="<?= $_SESSION['profile_pic'] ?? 'assets/images/default-pfp.png' ?>" width="45" height="45" class="rounded-circle me-3" alt="Profile Picture">
+  <input type="text"
+         class="form-control rounded-pill custom-dark-input border-0"
+         placeholder="Create a post..."
+         data-bs-toggle="modal"
+         data-bs-target="#createPostModal"
+         readonly>
+</div>
+
 
           <?php
           require_once 'includes/db_connect.php';

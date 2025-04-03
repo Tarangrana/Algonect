@@ -8,7 +8,7 @@ $isLoggedIn = isset($_SESSION['user_id']);
 
 <!-- Fixed Header -->
 <header>
-  <nav class="navbar navbar-expand-lg shadow-sm px-4 mb-3 bg-white justify-content-between">
+<nav class="navbar navbar-expand-lg shadow-sm px-4 mb-3 justify-content-between" style="background-color: var(--card-bg); color: var(--text-color);">
 
     <!-- Left Sidebar Toggle Button (leftmost, only visible on small screens) -->
     <div class="d-xl-none">
